@@ -16,6 +16,6 @@ jobs:
           php-version: '7.4'
       - uses: ramsey/composer-install@v2
         with:
-          composer-options: "--dev --ignore-platform-reqs"
+          composer-options: "--dev"
       - name: Run linter
         run: vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v --dry-run --stop-on-violation --using-cache=no src && vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v --dry-run --stop-on-violation --using-cache=no example
