@@ -11,7 +11,7 @@
   },
   "autoload": {
     "psr-4": {
-      "MathisBurger\\SurrealDb\\": ""
+      "MathisBurger\\SurrealDb\\": "src"
     }
   },
   "authors": [
