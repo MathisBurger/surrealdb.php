@@ -10,7 +10,7 @@ class ActionTest extends TestCase
      */
     public function testConnect(): void
     {
-        $conn = new SurrealDriver('ws://surrealdb:8000/rpc');
+        $conn = new SurrealDriver('ws://127.0.0.1:8000/rpc');
         $conn->login('root', 'root');
         $this->assertTrue(true);
     }
