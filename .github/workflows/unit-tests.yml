@@ -22,4 +22,4 @@ jobs:
         with:
           composer-options: "--dev"
       - name: Run tests
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit ./tests
