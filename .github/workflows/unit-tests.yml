@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       surrealdb:
-        image: surrealdb/surrealdb:latest start --log trace --user root --pass root memory
+        image: surrealdb/surrealdb:latest
     steps:
       - uses: actions/checkout@v3
       - uses: shivammathur/setup-php@v2
