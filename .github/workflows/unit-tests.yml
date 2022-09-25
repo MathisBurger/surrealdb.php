@@ -8,9 +8,6 @@ on:
 jobs:
   unit-test:
     runs-on: ubuntu-latest
-    services:
-      surrealdb:
-        image: surrealdb/surrealdb:latest
     steps:
       - uses: actions/checkout@v3
       - uses: shivammathur/setup-php@v2
@@ -19,3 +16,4 @@ jobs:
       - uses: ramsey/composer-install@v2
         with:
           composer-options: "--dev"
+      - uses: MathisBurger/surrealdb-action
