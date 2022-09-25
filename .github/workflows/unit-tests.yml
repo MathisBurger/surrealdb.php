@@ -11,6 +11,8 @@ jobs:
     services:
       surrealdb:
         image: ghcr.io/mathisburger/surrealdb-docker-service:latest
+        ports:
+          - 8000:8000
     steps:
       - uses: actions/checkout@v3
       - uses: shivammathur/setup-php@v2
