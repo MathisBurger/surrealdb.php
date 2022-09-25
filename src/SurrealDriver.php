@@ -70,11 +70,11 @@ class SurrealDriver
      *
      * @param string $what What should be selected
      *
-     * @return array The select results
+     * @return mixed The select results
      *
      * @throws BadOpcodeException If the websocket connection failed
      */
-    public function select(string $what): array
+    public function select(string $what): mixed
     {
         return $this->send('select', [$what])['result'];
     }
