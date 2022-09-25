@@ -3,8 +3,11 @@
 use MathisBurger\SurrealDb\SurrealDriver;
 use PHPUnit\Framework\TestCase;
 
-class ActionTests extends TestCase
+class ActionTest extends TestCase
 {
+    /**
+     * @test Tests connection to database server
+     */
     public function testConnect(): void
     {
         $conn = new SurrealDriver('ws://surrealdb:8000/rpc');
