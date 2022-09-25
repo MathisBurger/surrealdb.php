@@ -7,11 +7,10 @@ use WebSocket\BadOpcodeException;
 use WebSocket\Client;
 
 /**
- * The main file of the surreal db driver
+ * The main file of the surreal db driver.
  */
 class SurrealDriver
 {
-
     /**
      * @var Client The websocket client that is used for communication
      */
@@ -26,11 +25,11 @@ class SurrealDriver
     }
 
     /**
-     * Logs in a specific user into the database server
+     * Logs in a specific user into the database server.
      *
      * @param string $username The username of the user
      * @param string $password The password of the user
-     * @return void
+     *
      * @throws BadOpcodeException If the websocket connection failed
      */
     public function login(string $username, string $password): void
@@ -39,11 +38,11 @@ class SurrealDriver
     }
 
     /**
-     * Selects a specific namespace and database for the next requests
+     * Selects a specific namespace and database for the next requests.
      *
      * @param string $namespace The namespace
-     * @param string $database The database name
-     * @return void
+     * @param string $database  The database name
+     *
      * @throws BadOpcodeException If the websocket connection failed
      */
     public function useDatabase(string $namespace, string $database): void
@@ -52,11 +51,13 @@ class SurrealDriver
     }
 
     /**
-     * Creates a specific thing in the database with the given data
+     * Creates a specific thing in the database with the given data.
      *
      * @param string $thing The name of the thing in the database
-     * @param array $data The data of the entity
+     * @param array  $data  The data of the entity
+     *
      * @return mixed The created entity as result
+     *
      * @throws BadOpcodeException If the websocket connection failed
      */
     public function create(string $thing, array $data): mixed
@@ -68,7 +69,9 @@ class SurrealDriver
      * Selects everything from a table.
      *
      * @param string $what What should be selected
+     *
      * @return array The select results
+     *
      * @throws BadOpcodeException If the websocket connection failed
      */
     public function select(string $what): array
@@ -80,6 +83,7 @@ class SurrealDriver
      * Gets detailed information about the server.
      *
      * @return mixed The info of the server
+     *
      * @throws BadOpcodeException If the websocket connection failed
      */
     public function info(): mixed
@@ -91,6 +95,7 @@ class SurrealDriver
      * Invalidates something?
      *
      * @return mixed The response
+     *
      * @throws BadOpcodeException If the websocket connection failed
      */
     public function invalidate(): mixed
@@ -99,10 +104,12 @@ class SurrealDriver
     }
 
     /**
-     * Sends live content of the database table
+     * Sends live content of the database table.
      *
      * @param string $table The name of the table
+     *
      * @return array The streamed content
+     *
      * @throws BadOpcodeException If the websocket connection failed
      */
     public function live(string $table): array
@@ -114,7 +121,9 @@ class SurrealDriver
      * Kills a specific query.
      *
      * @param string $query The query that should be killed
+     *
      * @return mixed The result
+     *
      * @throws BadOpcodeException If the websocket connection failed
      */
     public function kill(string $query): mixed
@@ -123,11 +132,13 @@ class SurrealDriver
     }
 
     /**
-     * I do not know what this is doing
+     * I do not know what this is doing.
      *
      * @param string $key The key of the let
-     * @param array $val The values
+     * @param array  $val The values
+     *
      * @return mixed The result
+     *
      * @throws BadOpcodeException If the websocket connection failed
      */
     public function let(string $key, array $val): mixed
@@ -136,11 +147,13 @@ class SurrealDriver
     }
 
     /**
-     * Sends a query to the database
+     * Sends a query to the database.
      *
-     * @param string $sql The query
-     * @param array $vars The variables of the query
+     * @param string $sql  The query
+     * @param array  $vars The variables of the query
+     *
      * @return mixed The result of the query
+     *
      * @throws BadOpcodeException If the websocket connection failed
      */
     public function query(string $sql, array $vars): mixed
@@ -149,11 +162,13 @@ class SurrealDriver
     }
 
     /**
-     * Updates a specific entry in the database
+     * Updates a specific entry in the database.
      *
      * @param string $what What should be updated
-     * @param array $data The data that should be updated
+     * @param array  $data The data that should be updated
+     *
      * @return mixed The updated entity
+     *
      * @throws BadOpcodeException If the websocket connection failed
      */
     public function update(string $what, array $data): mixed
@@ -165,8 +180,10 @@ class SurrealDriver
      * Changes a specific entry in the database.
      *
      * @param string $what What should be changed
-     * @param mixed $data The data that should be changed
+     * @param mixed  $data The data that should be changed
+     *
      * @return mixed The response of the change event
+     *
      * @throws BadOpcodeException If the websocket connection failed
      */
     public function change(string $what, mixed $data): mixed
@@ -175,10 +192,12 @@ class SurrealDriver
     }
 
     /**
-     * Deletes everything of a specific type
+     * Deletes everything of a specific type.
      *
      * @param string $what Specific type
+     *
      * @return mixed The result of the request
+     *
      * @throws BadOpcodeException If the websocket connection failed
      */
     public function delete(string $what): mixed
@@ -187,29 +206,29 @@ class SurrealDriver
     }
 
     /**
-     *
      * @param string $method The method that should be performed
-     * @param array $params The parameters of the method
+     * @param array  $params The parameters of the method
+     *
      * @return array The response
+     *
      * @throws BadOpcodeException Deletes everything of a specific type
-     * @throws Exception If a random integer cannot be found
+     * @throws Exception          If a random integer cannot be found
      */
     private function send(string $method, array $params): array
     {
         $request = [
             'id' => strval(random_int(0, PHP_INT_MAX)),
             'async' => false,
-            'method' =>  $method,
-            'params' => $params
+            'method' => $method,
+            'params' => $params,
         ];
         $content = json_encode($request);
         $this->socket->send($content);
         while (true) {
             $response = $this->socket->receive();
-            if ($response !== null) {
+            if (null !== $response) {
                 return json_decode($response, true);
             }
         }
     }
-
 }
