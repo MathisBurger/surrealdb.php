@@ -8,6 +8,9 @@ on:
 jobs:
   unit-test:
     runs-on: ubuntu-latest
+    services:
+      surrealdb:
+        image: ghcr.io/mathisburger/surrealdb-docker-service:latest
     steps:
       - uses: actions/checkout@v3
       - uses: shivammathur/setup-php@v2
@@ -16,4 +19,3 @@ jobs:
       - uses: ramsey/composer-install@v2
         with:
           composer-options: "--dev"
-      - uses: MathisBurger/surrealdb-action@v1
