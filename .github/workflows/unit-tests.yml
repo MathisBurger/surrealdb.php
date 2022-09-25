@@ -19,3 +19,11 @@ jobs:
       - uses: ramsey/composer-install@v2
         with:
           composer-options: "--dev"
+      - name: Test connect
+        run: php example/Connect.php
+      - name: Test create
+        run: php example/Create.php
+      - name: Test select
+        run: php example/Select.php
+      - name: Test use database
+        run: php example/UseDatabase.php
