@@ -16,4 +16,4 @@ jobs:
       - uses: ramsey/composer-install@v2
         with:
           composer-options: "--dev"
-      - uses: MathisBurger/surrealdb-action:latest
+      - uses: MathisBurger/surrealdb-action@v1
