@@ -56,11 +56,11 @@ class SurrealDriver
      * @param string $thing The name of the thing in the database
      * @param array  $data  The data of the entity
      *
-     * @return mixed The created entity as result
+     * @return null The created entity as result
      *
      * @throws BadOpcodeException If the websocket connection failed
      */
-    public function create(string $thing, array $data): mixed
+    public function create(string $thing, array $data): array
     {
         return $this->send('create', [$thing, $data])['result'];
     }
@@ -74,7 +74,7 @@ class SurrealDriver
      *
      * @throws BadOpcodeException If the websocket connection failed
      */
-    public function select(string $what): mixed
+    public function select(string $what): array
     {
         return $this->send('select', [$what])['result'];
     }
